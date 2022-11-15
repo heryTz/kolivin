@@ -23,7 +23,9 @@
   "dependencies": {
     "@nestjs/apollo": "^10.1.6",
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/graphql": "^10.1.6",
     "@nestjs/graphql-workspace": "nestjs/graphql",
     "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^9.2.1",
