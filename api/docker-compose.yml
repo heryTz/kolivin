@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: kolivin_test
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_kolivin_data:/data/db
+
+  api:
+    build: .
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: yarn start
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_kolivin_data:
