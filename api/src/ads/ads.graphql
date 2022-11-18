@@ -1,0 +1,81 @@
+type File {
+  _id: String
+  filename: String
+  mimeType: String
+}
+
+type Tenant {
+  _id: String
+  firstName: String
+  lastName: String
+  email: String
+}
+
+type Renting {
+  _id: String
+  status: String
+  tenant: Tenant
+}
+
+type Property {
+  _id: String
+  title: String
+  address: String
+  surface: Int
+  rooms: [Room]
+  pictures: [File]
+}
+
+input InputRoom {
+  title: String
+  pictures: [String]
+  surface: Int
+}
+
+input CreatePropertyInput {
+  title: String
+  address: String
+  surface: Int
+  rooms: [InputRoom]
+  pictures: [String]
+}
+
+type Ad {
+  _id: String
+  title: String
+  description: String
+  rentalUnit: Int
+  property: Property
+  rentings: [Renting]
+  createdAt: Float
+}
+
+type AdPaginated {
+  data: [Ad]!
+  total: Int
+}
+
+input CreateAdInput {
+  title: String!
+  description: String!
+  rentalUnit: Int!
+  property: CreatePropertyInput!
+}
+
+input UpdateAdInput {
+  id: String!
+  title: String
+  description: String
+  rentalUnit: Int
+}
+
+type Query {
+  ads(offset: Int, limit: Int, sort: String): AdPaginated!
+  ad(id: String!): Ad
+}
+
+type Mutation {
+  createAd(createAdInput: CreateAdInput!): Ad!
+  updateAd(updateAdInput: UpdateAdInput!): Ad!
+  removeAd(id: String!): Ad
+}
