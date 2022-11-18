@@ -7,10 +7,21 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PropertyModule } from './property/property.module';
+import { RoomModule } from './room/room.module';
+import { TenantModule } from './tenant/tenant.module';
+import { RentingModule } from './renting/renting.module';
+import { AdsModule } from './ads/ads.module';
+import { FileModule } from './file/file.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import appConfig from './config/app.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [appConfig],
+      envFilePath: ['.env'],
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
@@ -26,7 +37,16 @@ import { PropertyModule } from './property/property.module';
       }),
       inject: [ConfigService],
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '/'),
+      exclude: ['/graphql'],
+    }),
     PropertyModule,
+    RoomModule,
+    TenantModule,
+    RentingModule,
+    AdsModule,
+    FileModule,
   ],
   controllers: [AppController],
   providers: [AppService],
