@@ -1,0 +1,37 @@
+type File {
+  _id: String
+  filename: String
+  mimeType: String
+}
+
+type Room {
+  _id: String
+  title: String
+  pictures: [File]
+  surface: Int
+}
+
+input CreateRoomInput {
+  title: String!
+  pictures: [String]!
+  surface: Int!
+  property: String!
+}
+
+input UpdateRoomInput {
+  id: String!
+  title: String
+  pictures: [String]
+  surface: Int
+}
+
+type Query {
+  rooms: [Room]!
+  room(id: String!): Room
+}
+
+type Mutation {
+  createRoom(createRoomInput: CreateRoomInput!): Room!
+  updateRoom(updateRoomInput: UpdateRoomInput!): Room!
+  removeRoom(id: String!): Room
+}
