@@ -1,0 +1,22 @@
+type Tenant {
+  _id: String
+  firstName: String
+  lastName: String
+  email: String
+}
+
+input CreateTenantInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+}
+
+type Query {
+  tenants: [Tenant]!
+  tenant(id: Int!): Tenant
+  tenantFindByEmail(email: String!): Tenant
+}
+
+type Mutation {
+  createTenant(createTenantInput: CreateTenantInput!): Tenant!
+}
