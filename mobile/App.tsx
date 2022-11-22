@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { SafeAreaView, StyleSheet } from 'react-native'
+import Main from './src/Main'
+import { API } from '@env'
+
+const client = new ApolloClient({
+  uri: API,
+  cache: new InMemoryCache(),
+})
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <ApolloProvider client={client}>
+      <SafeAreaView style={styles.fill}>
+        <Main />
+      </SafeAreaView>
+    </ApolloProvider>
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  fill: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-});
+})
