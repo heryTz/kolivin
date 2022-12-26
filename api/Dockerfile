@@ -1,14 +1,17 @@
-FROM node:16-alpine
+FROM node:16-alpine as base
+
+RUN npm i -g pnpm
 
 WORKDIR /app
 
-COPY package.json .
-COPY yarn.lock .
+COPY package.json pnpm-lock.yaml .npmrc ./
 
-RUN yarn install
+RUN pnpm i
 
-COPY . /app
+COPY . .
+
+FROM base as dev
 
 EXPOSE 3000
 
-CMD [ "yarn", "start:dev" ]
+CMD [ "pnpm", "start:dev" ]
