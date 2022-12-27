@@ -10,7 +10,7 @@ import AdListItem from './components/AdListItem'
 export default function AdList(props: AdListProps) {
   const { data, loading, error } = useQuery(GET_ADS, {
     variables: {
-      sort: 'created:DESC',
+      sort: 'createdAt:DESC',
       offset: 0,
       limit: 12,
     },
