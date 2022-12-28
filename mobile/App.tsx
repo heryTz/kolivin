@@ -3,6 +3,10 @@ import { SafeAreaView, StyleSheet } from 'react-native'
 import Main from './src/Main'
 import { API } from '@env'
 
+if (__DEV__) {
+  require('./ReactotronConfig')
+}
+
 const client = new ApolloClient({
   uri: API,
   cache: new InMemoryCache(),
