@@ -28,15 +28,10 @@ export class AdsService {
     const [sortField, sortOrder] = sort.split(':');
     const total = await this.adModel.count();
     const data = await this.adModel
-      .find(
-        {},
-        {},
-        {
-          skip: fetchAdInput.offset,
-          limit: fetchAdInput.limit,
-          sort: { [sortField]: sortOrder === 'DESC' ? -1 : 1 },
-        },
-      )
+      .find()
+      .skip(fetchAdInput.offset)
+      .limit(fetchAdInput.limit)
+      .sort({ [sortField]: sortOrder === 'DESC' ? -1 : 1 })
       .populate({
         path: 'retings',
         strictPopulate: false,
