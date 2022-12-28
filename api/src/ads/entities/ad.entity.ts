@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument, now } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import { Property } from 'src/graphql';
 import { Renting } from 'src/renting/entities/renting.entity';
 
-@Schema()
+@Schema({ timestamps: true })
 export class Ad {
   @Prop({ required: true })
   title: string;
@@ -20,8 +20,11 @@ export class Ad {
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Renting.name }] })
   rentings: Renting[];
 
-  @Prop({ default: now() })
+  @Prop()
   createdAt: Date;
+
+  @Prop()
+  updatedAt: Date;
 }
 
 export type AdDocument = HydratedDocument<Ad>;
