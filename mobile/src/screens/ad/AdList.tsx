@@ -12,7 +12,7 @@ export default function AdList(props: AdListProps) {
     variables: {
       sort: 'createdAt:DESC',
       offset: 0,
-      limit: 12,
+      limit: 10,
     },
   })
 

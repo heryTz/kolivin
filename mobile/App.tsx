@@ -9,7 +9,21 @@ if (__DEV__) {
 
 const client = new ApolloClient({
   uri: API,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          ads: {
+            keyArgs: false,
+            merge(existing, incoming) {
+              if (existing === undefined) return incoming
+              return { ...existing, data: [...existing.data, ...incoming.data] }
+            },
+          },
+        },
+      },
+    },
+  }),
 })
 
 export default function App() {
