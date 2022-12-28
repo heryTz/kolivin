@@ -18,7 +18,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "command": "ts-node -r tsconfig-paths/register ./src/commander.ts"
   },
   "dependencies": {
     "@apollo/gateway": "^2.1.4",
@@ -38,6 +39,7 @@
     "graphql": "^16.6.0",
     "mime-types": "^2.1.35",
     "mongoose": "^6.7.2",
+    "nest-commander": "^3.3.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",

@@ -13,6 +13,7 @@ import { RentingModule } from './renting/renting.module';
 import { AdsModule } from './ads/ads.module';
 import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { CliModule } from './cli/cli.module';
 import appConfig from './config/app.config';
 
 @Module({
@@ -47,6 +48,7 @@ import appConfig from './config/app.config';
     RentingModule,
     AdsModule,
     FileModule,
+    CliModule,
   ],
   controllers: [AppController],
   providers: [AppService],
