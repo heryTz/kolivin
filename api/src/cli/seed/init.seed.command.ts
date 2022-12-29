@@ -1,12 +1,12 @@
 import { Command, CommandRunner } from 'nest-commander';
-import { AdsSeed } from './ads.seed';
+import { AdsSeedCommand } from './ads.seed.command';
 
 @Command({ name: 'seed:init', description: 'Ajouter des fakes données' })
 export class InitSeedCommand extends CommandRunner {
-  constructor(private adsSeed: AdsSeed) {
+  constructor(private adsSeedCommand: AdsSeedCommand) {
     super();
   }
   async run() {
-    await this.adsSeed.run();
+    await this.adsSeedCommand.run();
   }
 }
