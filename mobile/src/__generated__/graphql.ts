@@ -16,19 +16,19 @@ export type Scalars = {
 
 export type Ad = {
   __typename?: 'Ad';
-  _id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['Float']>;
-  description?: Maybe<Scalars['String']>;
-  property?: Maybe<Property>;
-  rentalUnit?: Maybe<Scalars['Int']>;
-  rentings?: Maybe<Array<Maybe<Renting>>>;
-  title?: Maybe<Scalars['String']>;
+  _id: Scalars['String'];
+  createdAt: Scalars['Float'];
+  description: Scalars['String'];
+  property: Property;
+  rentalUnit: Scalars['Int'];
+  rentings: Array<Renting>;
+  title: Scalars['String'];
 };
 
 export type AdPaginated = {
   __typename?: 'AdPaginated';
-  data: Array<Maybe<Ad>>;
-  total?: Maybe<Scalars['Int']>;
+  data: Array<Ad>;
+  total: Scalars['Int'];
 };
 
 export type CreateAdInput = {
@@ -43,11 +43,11 @@ export type CreateFileInput = {
 };
 
 export type CreatePropertyInput = {
-  address?: InputMaybe<Scalars['String']>;
-  pictures?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  rooms?: InputMaybe<Array<InputMaybe<InputRoom>>>;
-  surface?: InputMaybe<Scalars['Int']>;
-  title?: InputMaybe<Scalars['String']>;
+  address: Scalars['String'];
+  pictures: Array<Scalars['String']>;
+  rooms: Array<InputRoom>;
+  surface: Scalars['Int'];
+  title: Scalars['String'];
 };
 
 export type CreateRentingInput = {
@@ -71,15 +71,15 @@ export type CreateTenantInput = {
 
 export type File = {
   __typename?: 'File';
-  _id?: Maybe<Scalars['String']>;
-  filename?: Maybe<Scalars['String']>;
-  mimeType?: Maybe<Scalars['String']>;
+  _id: Scalars['String'];
+  filename: Scalars['String'];
+  mimeType: Scalars['String'];
 };
 
 export type InputRoom = {
-  pictures?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  surface?: InputMaybe<Scalars['Int']>;
-  title?: InputMaybe<Scalars['String']>;
+  pictures: Array<Scalars['String']>;
+  surface: Scalars['Int'];
+  title: Scalars['String'];
 };
 
 export type Mutation = {
@@ -172,12 +172,12 @@ export type MutationUploadFileArgs = {
 
 export type Property = {
   __typename?: 'Property';
-  _id?: Maybe<Scalars['String']>;
-  address?: Maybe<Scalars['String']>;
-  pictures?: Maybe<Array<Maybe<File>>>;
-  rooms?: Maybe<Array<Maybe<Room>>>;
-  surface?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
+  _id: Scalars['String'];
+  address: Scalars['String'];
+  pictures: Array<File>;
+  rooms: Array<Room>;
+  surface: Scalars['Int'];
+  title: Scalars['String'];
 };
 
 export type Query = {
@@ -234,10 +234,10 @@ export type QueryTenantFindByEmailArgs = {
 
 export type Renting = {
   __typename?: 'Renting';
-  _id?: Maybe<Scalars['String']>;
+  _id: Scalars['String'];
   ad?: Maybe<Ad>;
-  status?: Maybe<Scalars['String']>;
-  tenant?: Maybe<Tenant>;
+  status: Scalars['String'];
+  tenant: Tenant;
 };
 
 export type Room = {
@@ -250,10 +250,10 @@ export type Room = {
 
 export type Tenant = {
   __typename?: 'Tenant';
-  _id?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
+  _id: Scalars['String'];
+  email: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
 };
 
 export type UpdateAdInput = {
@@ -291,7 +291,7 @@ export type GetAdsQueryVariables = Exact<{
 }>;
 
 
-export type GetAdsQuery = { __typename?: 'Query', ads: { __typename?: 'AdPaginated', total?: number | null, data: Array<{ __typename?: 'Ad', _id?: string | null, title?: string | null } | null> } };
+export type GetAdsQuery = { __typename?: 'Query', ads: { __typename?: 'AdPaginated', total: number, data: Array<{ __typename?: 'Ad', _id: string, title: string }> } };
 
 
 export const GetAdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"sort"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ads"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"Variable","name":{"kind":"Name","value":"sort"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<GetAdsQuery, GetAdsQueryVariables>;

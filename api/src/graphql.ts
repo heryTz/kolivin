@@ -9,17 +9,17 @@
 /* eslint-disable */
 
 export class InputRoom {
-    title?: Nullable<string>;
-    pictures?: Nullable<Nullable<string>[]>;
-    surface?: Nullable<number>;
+    title: string;
+    pictures: string[];
+    surface: number;
 }
 
 export class CreatePropertyInput {
-    title?: Nullable<string>;
-    address?: Nullable<string>;
-    surface?: Nullable<number>;
-    rooms?: Nullable<Nullable<InputRoom>[]>;
-    pictures?: Nullable<Nullable<string>[]>;
+    title: string;
+    address: string;
+    surface: number;
+    rooms: InputRoom[];
+    pictures: string[];
 }
 
 export class CreateAdInput {
@@ -81,47 +81,47 @@ export class CreateTenantInput {
 }
 
 export class File {
-    _id?: Nullable<string>;
-    filename?: Nullable<string>;
-    mimeType?: Nullable<string>;
+    _id: string;
+    filename: string;
+    mimeType: string;
 }
 
 export class Tenant {
-    _id?: Nullable<string>;
-    firstName?: Nullable<string>;
-    lastName?: Nullable<string>;
-    email?: Nullable<string>;
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
 }
 
 export class Renting {
-    _id?: Nullable<string>;
-    status?: Nullable<string>;
-    tenant?: Nullable<Tenant>;
+    _id: string;
+    status: string;
+    tenant: Tenant;
     ad?: Nullable<Ad>;
 }
 
 export class Property {
-    _id?: Nullable<string>;
-    title?: Nullable<string>;
-    address?: Nullable<string>;
-    surface?: Nullable<number>;
-    rooms?: Nullable<Nullable<Room>[]>;
-    pictures?: Nullable<Nullable<File>[]>;
+    _id: string;
+    title: string;
+    address: string;
+    surface: number;
+    rooms: Room[];
+    pictures: File[];
 }
 
 export class Ad {
-    _id?: Nullable<string>;
-    title?: Nullable<string>;
-    description?: Nullable<string>;
-    rentalUnit?: Nullable<number>;
-    property?: Nullable<Property>;
-    rentings?: Nullable<Nullable<Renting>[]>;
-    createdAt?: Nullable<number>;
+    _id: string;
+    title: string;
+    description: string;
+    rentalUnit: number;
+    property: Property;
+    rentings: Renting[];
+    createdAt: number;
 }
 
 export class AdPaginated {
-    data: Nullable<Ad>[];
-    total?: Nullable<number>;
+    data: Ad[];
+    total: number;
 }
 
 export abstract class IQuery {

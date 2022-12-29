@@ -43,13 +43,13 @@ export default function AdList(props: AdListProps) {
         <Button title="Ajouter" />
       </View>
       <Separator />
-      {loading && !data?.ads.total && <OverlayLoading />}
+      {loading && !data?.ads.data && <OverlayLoading />}
       {error && <ErrorAlert message={error.message} />}
       {data && (
         <FlatList
           data={data.ads.data}
-          renderItem={({ item }) => <AdListItem title={item!.title!} id={item!._id!} />}
-          keyExtractor={item => item?._id!}
+          renderItem={({ item }) => <AdListItem title={item.title} id={item._id} />}
+          keyExtractor={item => item._id}
           ItemSeparatorComponent={itemSeparatorComponent}
           ListEmptyComponent={
             <EmptyList>

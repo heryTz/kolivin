@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
-import { Property } from 'src/property/entities/property.entity';
 import { PropertyService } from 'src/property/property.service';
 import { Paginate } from 'src/utils/paginate.type';
 import { CreateAdInput } from './dto/create-ad.input';
@@ -18,7 +17,7 @@ export class AdsService {
 
   async create({ property, ...data }: CreateAdInput) {
     const newAd = await (await this.adModel.create(data)).save();
-    newAd.property = (await this.propertyService.create(property)) as Property;
+    newAd.property = (await this.propertyService.create(property)) as any;
     await newAd.save();
     return this.findOne(newAd._id as any);
   }
