@@ -15,10 +15,21 @@ const client = new ApolloClient({
         fields: {
           ads: {
             keyArgs: false,
-            merge(existing, incoming) {
+            merge(existing, incoming, options) {
               if (existing === undefined) return incoming
-              return { ...existing, data: [...existing.data, ...incoming.data] }
+              const data = existing.data.slice()
+              for (let i = 0; i < incoming.data.length; ++i) {
+                data[options.args?.offset + i] = incoming.data[i]
+              }
+              return { ...existing, data }
             },
+            // Je ne sais pas pourquoi mais lorsque j'utilise cette methode, si je définis le "keyExtractor" de "FlatList",
+            // React considère toujours qu'il y a des duplications des enfants: "Encountered two children with the same key"
+            //
+            // merge(existing, incoming) {
+            //   if (existing === undefined) return incoming
+            //   return { ...existing, data: [...existing.data, ...incoming.data] }
+            // },
           },
         },
       },

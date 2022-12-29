@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { useRef } from 'react'
 import { ActivityIndicator, Button, FlatList, Text, View } from 'react-native'
 import EmptyList from '../../components/EmptyList'
 import ErrorAlert from '../../components/ErrorAlert'
@@ -8,13 +9,33 @@ import { GET_ADS } from './Ad.query'
 import AdListItem from './components/AdListItem'
 
 export default function AdList(props: AdListProps) {
-  const { data, loading, error } = useQuery(GET_ADS, {
+  // Parfois, "onEndReached" n'est pas exécuté direcetement si on scroll trop.
+  // Met le "limit" à 10 pour le voir
+  const { data, loading, error, fetchMore } = useQuery(GET_ADS, {
+    notifyOnNetworkStatusChange: true,
     variables: {
-      sort: 'createdAt:DESC',
+      sort: 'title:DESC',
       offset: 0,
-      limit: 10,
+      limit: 20,
     },
   })
+  // One call per scroll
+  // https://stackoverflow.com/questions/53408470/flatlist-onendreached-being-called-multiple-times
+  const callOnScrollEnd = useRef(true)
+
+  const onEndReached = () => {
+    if (!callOnScrollEnd.current) return
+    callOnScrollEnd.current = false
+    fetchMore({
+      variables: {
+        offset: data?.ads.data.length ?? 0,
+      },
+    })
+  }
+
+  const onMomentumScrollBegin = () => {
+    callOnScrollEnd.current = true
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -22,12 +43,12 @@ export default function AdList(props: AdListProps) {
         <Button title="Ajouter" />
       </View>
       <Separator />
-      {loading && <OverlayLoading />}
+      {loading && !data?.ads.total && <OverlayLoading />}
       {error && <ErrorAlert message={error.message} />}
       {data && (
         <FlatList
           data={data.ads.data}
-          renderItem={({ item }) => <AdListItem key={item!._id} title={item!.title!} id={item!._id!} />}
+          renderItem={({ item }) => <AdListItem title={item!.title!} id={item!._id!} />}
           keyExtractor={item => item?._id!}
           ItemSeparatorComponent={itemSeparatorComponent}
           ListEmptyComponent={
@@ -36,6 +57,9 @@ export default function AdList(props: AdListProps) {
             </EmptyList>
           }
           ListFooterComponent={loading ? <ActivityIndicator /> : null}
+          onEndReachedThreshold={0.5}
+          onEndReached={onEndReached}
+          onMomentumScrollBegin={onMomentumScrollBegin}
         />
       )}
     </View>
