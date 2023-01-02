@@ -12,29 +12,26 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
+  DateTime: any;
 };
 
 export type Ad = {
   __typename?: 'Ad';
   _id: Scalars['String'];
-  createdAt: Scalars['Float'];
+  createdAt: Scalars['DateTime'];
   description: Scalars['String'];
   property: Property;
-  rentalUnit: Scalars['Int'];
+  rentalUnit: Scalars['Float'];
   rentings: Array<Renting>;
   title: Scalars['String'];
-};
-
-export type AdPaginated = {
-  __typename?: 'AdPaginated';
-  data: Array<Ad>;
-  total: Scalars['Int'];
+  updatedAt: Scalars['DateTime'];
 };
 
 export type CreateAdInput = {
   description: Scalars['String'];
   property: CreatePropertyInput;
-  rentalUnit: Scalars['Int'];
+  rentalUnit: Scalars['Float'];
   title: Scalars['String'];
 };
 
@@ -42,11 +39,17 @@ export type CreateFileInput = {
   data: Scalars['String'];
 };
 
+export type CreateInputRoomPartial = {
+  pictures: Array<Scalars['String']>;
+  surface: Scalars['Float'];
+  title: Scalars['String'];
+};
+
 export type CreatePropertyInput = {
   address: Scalars['String'];
   pictures: Array<Scalars['String']>;
-  rooms: Array<InputRoom>;
-  surface: Scalars['Int'];
+  rooms: Array<CreateInputRoomPartial>;
+  surface: Scalars['Float'];
   title: Scalars['String'];
 };
 
@@ -57,9 +60,9 @@ export type CreateRentingInput = {
 };
 
 export type CreateRoomInput = {
-  pictures: Array<InputMaybe<Scalars['String']>>;
+  pictures: Array<Scalars['String']>;
   property: Scalars['String'];
-  surface: Scalars['Int'];
+  surface: Scalars['Float'];
   title: Scalars['String'];
 };
 
@@ -76,12 +79,6 @@ export type File = {
   mimeType: Scalars['String'];
 };
 
-export type InputRoom = {
-  pictures: Array<Scalars['String']>;
-  surface: Scalars['Int'];
-  title: Scalars['String'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   createAd: Ad;
@@ -89,13 +86,12 @@ export type Mutation = {
   createRenting: Renting;
   createRoom: Room;
   createTenant: Tenant;
-  deleteFile?: Maybe<File>;
-  removeAd?: Maybe<Ad>;
-  removeProperty?: Maybe<Property>;
-  removeRoom?: Maybe<Room>;
+  removeAd: Ad;
+  removeFile: File;
+  removeProperty: Property;
+  removeRoom: Room;
   updateAd: Ad;
   updateProperty: Property;
-  updateRenting: Renting;
   updateRoom: Room;
   uploadFile: File;
 };
@@ -107,7 +103,7 @@ export type MutationCreateAdArgs = {
 
 
 export type MutationCreatePropertyArgs = {
-  createPropertyInput: CreatePropertyInput;
+  createProperty: CreatePropertyInput;
 };
 
 
@@ -117,21 +113,21 @@ export type MutationCreateRentingArgs = {
 
 
 export type MutationCreateRoomArgs = {
-  createRoomInput: CreateRoomInput;
+  createRoom: CreateRoomInput;
 };
 
 
 export type MutationCreateTenantArgs = {
-  createTenantInput: CreateTenantInput;
-};
-
-
-export type MutationDeleteFileArgs = {
-  id: Scalars['String'];
+  createTenant: CreateTenantInput;
 };
 
 
 export type MutationRemoveAdArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationRemoveFileArgs = {
   id: Scalars['String'];
 };
 
@@ -152,22 +148,23 @@ export type MutationUpdateAdArgs = {
 
 
 export type MutationUpdatePropertyArgs = {
-  updatePropertyInput: UpdatePropertyInput;
-};
-
-
-export type MutationUpdateRentingArgs = {
-  updateRentingInput: UpdateRentingInput;
+  updateProperty: UpdatePropertyInput;
 };
 
 
 export type MutationUpdateRoomArgs = {
-  updateRoomInput: UpdateRoomInput;
+  updateRoom: UpdateRoomInput;
 };
 
 
 export type MutationUploadFileArgs = {
-  createFileInput: CreateFileInput;
+  uploadFile: CreateFileInput;
+};
+
+export type PaginatedAd = {
+  __typename?: 'PaginatedAd';
+  data: Array<Ad>;
+  total: Scalars['Int'];
 };
 
 export type Property = {
@@ -176,23 +173,22 @@ export type Property = {
   address: Scalars['String'];
   pictures: Array<File>;
   rooms: Array<Room>;
-  surface: Scalars['Int'];
+  surface: Scalars['Float'];
   title: Scalars['String'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  ad?: Maybe<Ad>;
-  ads: AdPaginated;
-  properties: Array<Maybe<Property>>;
-  property?: Maybe<Property>;
-  renting?: Maybe<Renting>;
-  rentings: Array<Maybe<Renting>>;
-  room?: Maybe<Room>;
-  rooms: Array<Maybe<Room>>;
-  tenant?: Maybe<Tenant>;
-  tenantFindByEmail?: Maybe<Tenant>;
-  tenants: Array<Maybe<Tenant>>;
+  ad: Ad;
+  ads: PaginatedAd;
+  properties: Array<Property>;
+  property: Property;
+  renting: Renting;
+  rentings: Renting;
+  room: Room;
+  rooms: Array<Room>;
+  tenant: Tenant;
+  tenantByEmail: Tenant;
 };
 
 
@@ -214,38 +210,39 @@ export type QueryPropertyArgs = {
 
 
 export type QueryRentingArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type QueryRoomArgs = {
   id: Scalars['String'];
 };
 
 
-export type QueryTenantArgs = {
-  id: Scalars['Int'];
+export type QueryRoomArgs = {
+  id: Scalars['Float'];
 };
 
 
-export type QueryTenantFindByEmailArgs = {
+export type QueryTenantArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryTenantByEmailArgs = {
   email: Scalars['String'];
 };
 
 export type Renting = {
   __typename?: 'Renting';
   _id: Scalars['String'];
-  ad?: Maybe<Ad>;
+  ad: Ad;
   status: Scalars['String'];
   tenant: Tenant;
 };
 
 export type Room = {
   __typename?: 'Room';
-  _id?: Maybe<Scalars['String']>;
-  pictures?: Maybe<Array<Maybe<File>>>;
-  surface?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
+  _id: Scalars['String'];
+  pictures: Array<File>;
+  property: Property;
+  surface: Scalars['Float'];
+  title: Scalars['String'];
 };
 
 export type Tenant = {
@@ -259,28 +256,25 @@ export type Tenant = {
 export type UpdateAdInput = {
   description?: InputMaybe<Scalars['String']>;
   id: Scalars['String'];
-  rentalUnit?: InputMaybe<Scalars['Int']>;
+  property?: InputMaybe<CreatePropertyInput>;
+  rentalUnit?: InputMaybe<Scalars['Float']>;
   title?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdatePropertyInput = {
   address?: InputMaybe<Scalars['String']>;
   id: Scalars['String'];
-  pictures?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  rooms?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  surface?: InputMaybe<Scalars['Int']>;
+  pictures?: InputMaybe<Array<Scalars['String']>>;
+  rooms: Array<Scalars['String']>;
+  surface?: InputMaybe<Scalars['Float']>;
   title?: InputMaybe<Scalars['String']>;
-};
-
-export type UpdateRentingInput = {
-  id: Scalars['Int'];
-  status?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateRoomInput = {
   id: Scalars['String'];
-  pictures?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  surface?: InputMaybe<Scalars['Int']>;
+  pictures?: InputMaybe<Array<Scalars['String']>>;
+  property?: InputMaybe<Scalars['String']>;
+  surface?: InputMaybe<Scalars['Float']>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -291,7 +285,7 @@ export type GetAdsQueryVariables = Exact<{
 }>;
 
 
-export type GetAdsQuery = { __typename?: 'Query', ads: { __typename?: 'AdPaginated', total: number, data: Array<{ __typename?: 'Ad', _id: string, title: string }> } };
+export type GetAdsQuery = { __typename?: 'Query', ads: { __typename?: 'PaginatedAd', total: number, data: Array<{ __typename?: 'Ad', _id: string, title: string }> } };
 
 
 export const GetAdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"sort"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ads"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"Variable","name":{"kind":"Name","value":"sort"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<GetAdsQuery, GetAdsQueryVariables>;

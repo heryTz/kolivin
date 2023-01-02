@@ -2,12 +2,12 @@ import { ArgsType, Field, Int } from '@nestjs/graphql';
 
 @ArgsType()
 export class FetchAdInput {
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   offset?: number;
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   limit?: number;
 
-  @Field()
+  @Field(() => String, { nullable: true })
   sort?: 'createdAt:ASC' | 'updatedAt:DESC';
 }

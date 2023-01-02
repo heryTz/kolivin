@@ -100,7 +100,7 @@ type Property {
 
 type Query {
   ad(id: String!): Ad!
-  ads(limit: Int!, offset: Int!, sort: String!): PaginatedAd!
+  ads(limit: Int, offset: Int, sort: String): PaginatedAd!
   properties: [Property!]!
   property(id: String!): Property!
   renting(id: String!): Renting!
