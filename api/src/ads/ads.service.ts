@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { PropertyService } from 'src/property/property.service';
-import { Paginate } from 'src/utils/paginate.type';
 import { CreateAdInput } from './dto/create-ad.input';
 import { FetchAdInput } from './dto/fetch-ad.input';
+import { PaginatedAd } from './dto/paginated-ad';
 import { UpdateAdInput } from './dto/update-ad.input';
 import { Ad, AdDocument } from './entities/ad.entity';
 
@@ -17,12 +17,12 @@ export class AdsService {
 
   async create({ property, ...data }: CreateAdInput) {
     const newAd = await (await this.adModel.create(data)).save();
-    newAd.property = (await this.propertyService.create(property)) as any;
+    newAd.property = await this.propertyService.create(property);
     await newAd.save();
     return this.findOne(newAd._id as any);
   }
 
-  async findAll(fetchAdInput: FetchAdInput): Promise<Paginate<Ad>> {
+  async findAll(fetchAdInput: FetchAdInput): Promise<PaginatedAd> {
     const sort = fetchAdInput.sort ?? 'createdAt:DESC';
     const [sortField, sortOrder] = sort.split(':');
     const total = await this.adModel.count();
