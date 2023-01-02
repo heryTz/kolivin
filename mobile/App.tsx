@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { SafeAreaView, StyleSheet } from 'react-native'
-import Main from './src/Main'
 import { API } from '@env'
+import Main from 'src/Main'
 
 if (__DEV__) {
   require('./ReactotronConfig')

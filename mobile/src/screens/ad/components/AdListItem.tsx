@@ -1,6 +1,6 @@
+import { clampText } from 'src/utils/formater'
+import { Ad } from 'src/__generated__/graphql'
 import { Button, Text, View } from 'react-native'
-import { clampText } from '../../../utils/formater'
-import { Ad } from '../../../__generated__/graphql'
 
 export default function AdListItem(props: AdListItemProps) {
   return (

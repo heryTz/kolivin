@@ -1,4 +1,4 @@
-import { gql } from '../../__generated__'
+import { gql } from 'src/__generated__'
 
 export const GET_ADS = gql(`
   query GetAds($sort: String, $offset: Int, $limit: Int) {
