@@ -1,18 +1,19 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { FileService } from './file.service';
 import { CreateFileInput } from './dto/create-file.input';
+import { File } from './entities/file.entity';
 
-@Resolver('File')
+@Resolver(() => File)
 export class FileResolver {
   constructor(private readonly fileService: FileService) {}
 
-  @Mutation('uploadFile')
-  uploadFile(@Args('createFileInput') createFileInput: CreateFileInput) {
+  @Mutation(() => File)
+  uploadFile(@Args('uploadFile') createFileInput: CreateFileInput) {
     return this.fileService.create(createFileInput);
   }
 
-  @Mutation('deleteFile')
-  deleteFile(@Args('id') id: string) {
+  @Mutation(() => File)
+  removeFile(@Args('id') id: string) {
     return this.fileService.remove(id as any);
   }
 }

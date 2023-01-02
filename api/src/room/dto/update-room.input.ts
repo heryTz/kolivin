@@ -1,6 +1,10 @@
 import { CreateRoomInput } from './create-room.input';
-import { PartialType } from '@nestjs/mapped-types';
+import { Field, InputType, PartialType } from '@nestjs/graphql';
+import { IsNotEmpty } from 'class-validator';
 
+@InputType()
 export class UpdateRoomInput extends PartialType(CreateRoomInput) {
-  id: number;
+  @Field()
+  @IsNotEmpty()
+  id: string;
 }

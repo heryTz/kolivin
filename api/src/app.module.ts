@@ -25,11 +25,8 @@ import appConfig from './config/app.config';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      typePaths: ['./**/*.graphql'],
-      definitions: {
-        path: join(process.cwd(), 'src/graphql.ts'),
-        outputAs: 'class',
-      },
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      sortSchema: true,
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
