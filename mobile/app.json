@@ -2,7 +2,7 @@
   "expo": {
     "name": "kg-test",
     "slug": "kg-test",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -25,7 +25,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.herytz.kgtest"
+      "package": "com.herytz.kgtest",
+      "versionCode": 5
     },
     "web": {
       "favicon": "./assets/favicon.png"
