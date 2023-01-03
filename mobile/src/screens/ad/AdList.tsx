@@ -7,6 +7,7 @@ import { useRef } from 'react'
 import { ActivityIndicator, Button, FlatList, Text, View } from 'react-native'
 import { GET_ADS } from './Ad.query'
 import AdListItem from './components/AdListItem'
+import { API } from '@env'
 
 export default function AdList(props: AdListProps) {
   // Parfois, "onEndReached" n'est pas exécuté direcetement si on scroll trop.
@@ -39,6 +40,8 @@ export default function AdList(props: AdListProps) {
 
   return (
     <View style={{ flex: 1 }}>
+      <Text>{API}</Text>
+      <Separator />
       <View style={{ padding: 8 }}>
         <Button title="Ajouter" />
       </View>
