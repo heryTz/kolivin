@@ -40,7 +40,7 @@ export default function AdList(props: AdListProps) {
 
   return (
     <View style={{ flex: 1 }}>
-      <Text>APII: {API}</Text>
+      <Text>API: {API}</Text>
       <Separator />
       <View style={{ padding: 8 }}>
         <Button title="Ajouter" />
