@@ -9,7 +9,7 @@ const APP_ID_SUFFIX = APP_SUFFIX ? `.${APP_SUFFIX}` : ''
 export default {
   name: `kg-test${APP_NAME_SUFFIX}`,
   slug: 'kg-test',
-  version: '1.0.6',
+  version: '1.0.7',
   orientation: 'portrait',
   icon: './assets/icon.png',
   userInterfaceStyle: 'light',
@@ -32,7 +32,7 @@ export default {
       backgroundColor: '#FFFFFF',
     },
     package: `com.kgtest${APP_ID_SUFFIX}`,
-    versionCode: 7,
+    versionCode: 8,
   },
   web: {
     favicon: './assets/favicon.png',
@@ -41,5 +41,11 @@ export default {
     eas: {
       projectId: 'f6bc349d-2aeb-414c-801b-81479c2c0338',
     },
+  },
+  updates: {
+    url: 'https://u.expo.dev/f6bc349d-2aeb-414c-801b-81479c2c0338',
+  },
+  runtimeVersion: {
+    policy: 'sdkVersion',
   },
 }
