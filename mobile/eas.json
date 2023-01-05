@@ -10,7 +10,8 @@
       "env": {
         "API": "http://192.168.200.118:3000/graphql",
         "APP_VARIANT": "development"
-      }
+      },
+      "channel": "development"
     },
     "preview": {
       "channel": "preview",
