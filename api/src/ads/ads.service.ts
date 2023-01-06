@@ -25,9 +25,7 @@ export class AdsService {
   async findAll(fetchAdInput: FetchAdInput): Promise<PaginatedAd> {
     const sort = fetchAdInput.sort ?? 'createdAt:DESC';
     const [sortField, sortOrder] = sort.split(':');
-
     const total = await this.adModel.count();
-
     const data = await this.adModel
       .find()
       .skip(fetchAdInput.offset)
@@ -50,7 +48,6 @@ export class AdsService {
           { path: 'pictures' },
         ],
       });
-
     return { data, total };
   }
 
