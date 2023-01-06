@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          path: 'mobile'
+          path: mobile
 
       - name: Setup Node
         uses: actions/setup-node@v2
