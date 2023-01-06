@@ -2,7 +2,7 @@ name: Update mobile
 on: 
   push:
     paths:
-      - mobile
+      - 'mobile/**'
 
 jobs:
   update:
