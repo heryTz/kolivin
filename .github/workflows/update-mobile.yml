@@ -19,10 +19,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: "working directory"
-        working-directory: mobile
-        run: pwd
-
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -38,7 +34,9 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Install dependencies
+        working-directory: mobile
         run: npm install
 
       - name: Publish update
+        working-directory: mobile
         run: eas update --auto
