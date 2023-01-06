@@ -1,4 +1,4 @@
-name: update mobile
+name: Update mobile
 on: 
   push:
     paths:
