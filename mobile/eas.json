@@ -13,15 +13,15 @@
       },
       "channel": "development"
     },
-    "preview": {
-      "channel": "preview",
+    "staging": {
+      "channel": "staging",
       "distribution": "internal",
       "android": {
         "buildType": "apk"
       },
       "env": {
         "API": "http://192.168.200.118:3000/graphql",
-        "APP_VARIANT": "preview"
+        "APP_VARIANT": "staging"
       }
     },
     "production": {

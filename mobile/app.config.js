@@ -1,7 +1,7 @@
 const IS_DEV = process.env.APP_VARIANT === 'development'
-const IS_PREVIEW = process.env.APP_VARIANT === 'preview'
+const IS_STAGING = process.env.APP_VARIANT === 'staging'
 
-const APP_SUFFIX = IS_DEV ? 'dev' : IS_PREVIEW ? 'preview' : ''
+const APP_SUFFIX = IS_DEV ? 'dev' : IS_STAGING ? 'staging' : ''
 
 const APP_NAME_SUFFIX = APP_SUFFIX ? ` (${APP_SUFFIX})` : ''
 const APP_ID_SUFFIX = APP_SUFFIX ? `.${APP_SUFFIX}` : ''
