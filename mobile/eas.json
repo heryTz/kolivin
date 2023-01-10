@@ -1,19 +1,36 @@
 {
   "cli": {
-    "version": ">= 3.1.1"
+    "version": ">= 3.1.1",
+    "appVersionSource": "local"
   },
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "API": "http://192.168.200.118:3000/graphql",
+        "APP_VARIANT": "development"
+      },
+      "channel": "development"
     },
-    "preview": {
+    "staging": {
+      "channel": "staging",
       "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "API": "http://192.168.200.118:3000/graphql",
+        "APP_VARIANT": "staging"
       }
     },
-    "production": {}
+    "production": {
+      "channel": "production",
+      "env": {
+        "API": "http://192.168.200.118:3000/graphql",
+        "APP_VARIANT": "production"
+      }
+    }
   },
   "submit": {
     "production": {}
