@@ -1,6 +1,8 @@
-name: Update mobile
+name: Update staging mobile
 on: 
   push:
+    branches:
+      - staging
     paths:
       - 'mobile/**'
 
