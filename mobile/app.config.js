@@ -9,7 +9,7 @@ const APP_ID_SUFFIX = APP_SUFFIX ? `.${APP_SUFFIX}` : ''
 export default {
   name: `kg-test${APP_NAME_SUFFIX}`,
   slug: 'kg-test',
-  version: '1.0.9',
+  version: '1.0.10',
   orientation: 'portrait',
   icon: './assets/icon.png',
   userInterfaceStyle: 'light',
@@ -32,7 +32,7 @@ export default {
       backgroundColor: '#FFFFFF',
     },
     package: `com.kgtest${APP_ID_SUFFIX}`,
-    versionCode: 10,
+    versionCode: 11,
   },
   web: {
     favicon: './assets/favicon.png',
