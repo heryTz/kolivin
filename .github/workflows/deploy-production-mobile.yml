@@ -39,6 +39,6 @@ jobs:
         working-directory: mobile
         run: npm install
 
-      - name: Publish update
+      - name: Build production
         working-directory: mobile
         run: eas build --profile production --platform android
